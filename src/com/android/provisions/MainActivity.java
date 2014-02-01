@@ -3,8 +3,10 @@ package com.android.provisions;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -65,6 +67,16 @@ public class MainActivity extends Activity {
         
         PackageManager packageManager = this.getPackageManager();
         
+        final String deviceId = ( (TelephonyManager) getSystemService( Context.TELEPHONY_SERVICE ) )
+        		.getDeviceId();
+        
+        try {
+			UUID uuid = deviceId!=null ? UUID.nameUUIDFromBytes(deviceId.
+					getBytes("utf8") ) : UUID.randomUUID();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Log.d(TAG, "getBaseInfomation Build.MODEL =  " + Build.MODEL + " Build.VERSION.RELEASE  =  "
         + Build.VERSION.RELEASE + " Build.VERSION.SDK =  " + Build.VERSION.SDK_INT);
     }
@@ -83,7 +95,9 @@ public class MainActivity extends Activity {
             version[0] = arrayOfString[2];//KernelVersion
             localBufferedReader.close();
         } catch (IOException e) {
+            
         }
+        
         version[1] = Build.VERSION.RELEASE;// firmware version
         version[2] = Build.MODEL;//model
         version[3] = Build.DISPLAY;//system version

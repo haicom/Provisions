@@ -109,7 +109,7 @@ public class ProvisionDatabaseHelper extends  SQLiteOpenHelper  {
                 +  AppChange.APP_NAME  +  " TEXT, "
                 +  AppChange.PACKAGE_NAME +  " TEXT, "
                 +  AppChange.VERSION_NAME  +  " TEXT, "
-                +  AppChange.VERSION_CODE +  " TEXT, "
+                +  AppChange.VERSION_CODE +  " INTEGER DEFAULT 0 , "
                 +  AppChange.SOURCE_DIR +  " TEXT, "
                 +  AppChange.CHANGE_TYPE +  " INTEGER DEFAULT 0, " 
                 +  AppChange.DATE +  " INTEGER NOT NULL, " 
